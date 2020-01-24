@@ -62,10 +62,10 @@
             <button class="btn btn-sm btn-primary" ngbDropdownToggle>Actions</button>
             <div class="dropdown-menu" ngbDropdownMenu>
               <button ngbDropdownItem (click)="previewDetails(task, 'Request preview'); $event.stopPropagation();">
-                View details
+                View as code
               </button>
               <button ngbDropdownItem (click)="editRequest(task); $event.stopPropagation();">
-                Edit request
+                Edit
               </button>
               <button ngbDropdownItem (click)="deleteTask(task.id); $event.stopPropagation();">
                 Delete
@@ -124,18 +124,12 @@
           <div class="btn-group utask_bloc_header_dropdown" ngbDropdown role="group">
             <button class="btn btn-sm btn-primary" ngbDropdownToggle>Actions</button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button ngbDropdownItem (click)="previewDetails(resolution, 'Resolution preview');">View
-                details</button>
-              <button ngbDropdownItem (click)="runResolution(resolution);">Run
-                resolution</button>
-              <button ngbDropdownItem (click)="pauseResolution(resolution);">Pause
-                resolution</button>
-              <button ngbDropdownItem (click)="extendResolution(resolution);">Extend
-                resolution</button>
-              <button ngbDropdownItem (click)="cancelResolution(resolution);">Cancel
-                resolution</button>
-              <button ngbDropdownItem (click)="editResolution(resolution);">Edit
-                resolution</button>
+              <button ngbDropdownItem (click)="previewDetails(resolution, 'Resolution preview');">View as code</button>
+              <button ngbDropdownItem (click)="runResolution(resolution);">Run</button>
+              <button ngbDropdownItem (click)="pauseResolution(resolution);">Pause</button>
+              <button ngbDropdownItem (click)="extendResolution(resolution);">Extend</button>
+              <button ngbDropdownItem (click)="cancelResolution(resolution);">Cancel</button>
+              <button ngbDropdownItem (click)="editResolution(resolution);">Edit</button>
             </div>
           </div>
         </header>

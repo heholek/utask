@@ -11,7 +11,7 @@ import { RequestService } from 'src/app/@services/request.service';
 import MetaUtask from 'src/app/@models/meta-utask.model';
 import Task from '../../@models/task.model';
 import { TaskService } from 'src/app/@services/task.service';
-import { ActiveIntervalService } from 'src/app/@services/active-interval.service';
+import { ActiveInterval } from 'active-interval';
 
 @Component({
   templateUrl: './task.html'
@@ -70,7 +70,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.refreshes.tasks = new ActiveIntervalService();
+    this.refreshes.tasks = new ActiveInterval();
     this.refreshes.tasks.setInterval(() => {
       if (!this.loaders.tasks && this.autorefresh) {
         this.loadTask().then(() => {
@@ -83,7 +83,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   addComment() {
     this.loaders.addComment = true;
     this.api.addComment(this.task.id, this.comment.content).toPromise().then((comment) => {
-      this.task.comments = this.task.comments ? this.task.comments : [];
+      this.task.comments = _.get(this.task, 'comments', []);
       this.task.comments.push(comment);
       this.errors.addComment = null;
       this.comment.content = '';
@@ -225,6 +225,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.loaders.task = true;
       this.api.task(this.taskId).subscribe((data: Task) => {
         this.task = data;
+        this.task.comments = _.orderBy(_.get(this.task, 'comments', []), ['created'], ['asc']);
         this.item.task_id = this.task.id;
         this.template = _.find(this.route.parent.snapshot.data.templates, { name: this.task.template_name });
         this.taskIsResolvable = this.requestService.isResolvable(this.task, this.meta, this.template.allowed_resolver_usernames);
